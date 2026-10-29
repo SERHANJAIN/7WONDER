@@ -3,101 +3,63 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101b24">
-  <meta name="description" content="Explore the New Seven Wonders of the World on an interactive map.">
-  <title>Wonders Atlas — Seven Wonders of the World</title>
+  <meta name="theme-color" content="#f7f5f0">
+  <meta name="description" content="A minimalist atlas of the New Seven Wonders of the World.">
+  <title>Wonders Atlas — A World of Wonder</title>
   <link rel="preconnect" href="https://unpkg.com">
   <link rel="preconnect" href="https://tile.openstreetmap.org">
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app-shell">
-    <header class="topbar">
-      <a class="brand" href="#" aria-label="Wonders Atlas home">
-        <span class="brand-mark">✳</span>
-        <span>WONDERS<span class="brand-light">ATLAS</span></span>
-      </a>
-      <div class="topbar-note"><span class="live-dot"></span> A WORLD OF HUMAN INGENUITY</div>
-      <a class="top-link" href="#explore">Explore the map <span>↗</span></a>
-    </header>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Wonders Atlas home"><span class="brand-symbol">✳</span> WONDERS <span>ATLAS</span></a>
+    <span class="top-caption">A FIELD GUIDE TO THE EXTRAORDINARY</span>
+  </header>
 
-    <main>
-      <section class="intro" id="explore">
-        <div class="eyebrow"><span class="eyebrow-line"></span> SEVEN ICONS. ONE PLANET.</div>
-        <h1>Humanity’s greatest<br><em>masterpieces.</em></h1>
-        <p class="intro-copy">Travel across continents and centuries. Hover over a marker to preview a wonder, then open its story to discover the history behind the landmark.</p>
-        <div class="intro-stats">
-          <div><strong>7</strong><span>Wonders</span></div>
-          <div class="stat-divider"></div>
-          <div><strong>6</strong><span>Countries</span></div>
-          <div class="stat-divider"></div>
-          <div><strong>2,000+</strong><span>Years of history</span></div>
-        </div>
-      </section>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">THE NEW SEVEN WONDERS</p>
+      <h1>A world of wonder.</h1>
+      <p class="intro-text">Seven remarkable places. Thousands of years of human imagination.<br class="desktop-break"> Select a marker to discover the story behind it.</p>
+    </section>
 
-      <section class="map-section" aria-label="Interactive world map">
-        <div class="map-heading">
-          <div>
-            <span class="section-kicker">THE EXPLORER</span>
-            <h2>Find your wonder<span class="period">.</span></h2>
-          </div>
-          <div class="map-instructions"><span class="instruction-icon">⌖</span> Hover to preview <span class="instruction-separator">·</span> Click to discover</div>
-        </div>
-        <div class="map-frame">
-          <div class="map-overlay map-overlay-top">
-            <span class="map-tag"><span class="live-dot"></span> INTERACTIVE WORLD MAP</span>
-            <button id="resetMap" class="reset-button" type="button" title="Reset map view">Reset view ↺</button>
-          </div>
-          <div id="map" role="application" aria-label="Map with markers for the seven wonders"></div>
-          <div class="map-legend"><span class="legend-dot"></span> THE NEW 7 WONDERS OF THE WORLD</div>
-        </div>
-        <div class="bottom-note"><span>01 — 07</span><span>Every landmark has a story. Start exploring.</span><span>WONDERS ATLAS © 2026</span></div>
-      </section>
-    </main>
+    <section class="map-section" aria-label="Interactive world map">
+      <div class="map-heading">
+        <span>EXPLORE THE MAP</span>
+        <button id="resetMap" type="button">Reset view ↺</button>
+      </div>
+      <div class="map-frame">
+        <div id="map" role="application" aria-label="Interactive map marking the seven wonders"></div>
+        <div class="map-credit">MAP DATA © OPENSTREETMAP</div>
+      </div>
+      <p class="map-hint"><span class="hint-dot"></span> Hover over a marker for a photo · Click to read a short summary</p>
+    </section>
+  </main>
 
-    <footer>
-      <span class="footer-brand">WONDERS<span class="brand-light">ATLAS</span></span>
-      <span>Made for the endlessly curious.</span>
-      <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">Map data © OpenStreetMap</a>
-    </footer>
-  </div>
-
-  <div id="previewCard" class="preview-card" aria-hidden="true">
-    <img id="previewImage" src="" alt="">
-    <div class="preview-copy">
-      <span id="previewCountry" class="preview-country"></span>
-      <h3 id="previewName"></h3>
-      <span class="preview-action">DISCOVER STORY <span>↗</span></span>
-    </div>
-  </div>
+  <footer>
+    <span class="footer-brand">WONDERS ATLAS</span>
+    <span>Made for the curious.</span>
+  </footer>
 
   <div id="wonderModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-backdrop" data-close="true"></div>
+    <button class="modal-backdrop" data-close="true" aria-label="Close dialog"></button>
     <article class="modal-panel">
-      <button class="modal-close" id="closeModal" aria-label="Close story" type="button">×</button>
-      <div class="modal-image-wrap">
-        <img id="modalImage" src="" alt="">
-        <div class="modal-image-shade"></div>
-        <div class="modal-image-label"><span id="modalNumber">01</span><span>THE SEVEN WONDERS</span></div>
-      </div>
-      <div class="modal-content">
-        <div class="modal-kicker" id="modalCountry"></div>
+      <button class="modal-close" id="closeModal" type="button" aria-label="Close">×</button>
+      <img id="modalImage" class="modal-image" src="" alt="">
+      <div class="modal-body">
+        <p id="modalKicker" class="modal-kicker"></p>
         <h2 id="modalTitle"></h2>
-        <p class="modal-subtitle" id="modalSubtitle"></p>
-        <div class="modal-facts" id="modalFacts"></div>
-        <div class="story-divider"></div>
-        <h3 class="story-heading">A story carved in time</h3>
-        <p class="modal-description" id="modalDescription"></p>
-        <p class="modal-significance" id="modalSignificance"></p>
-        <div class="modal-footer"><span id="modalCoordinates"></span><button id="nextWonder" type="button">NEXT WONDER <span>→</span></button></div>
+        <p id="modalSummary" class="modal-summary"></p>
+        <div class="modal-fact"><span>QUICK FACT</span><p id="modalFact"></p></div>
+        <div class="modal-bottom"><span id="modalLocation"></span><button id="nextWonder" type="button">NEXT WONDER <span>→</span></button></div>
       </div>
     </article>
   </div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,27 +1,23 @@
-# Wonders Atlas — The New Seven Wonders of the World
+# Wonders Atlas — Minimal Edition
 
-A premium, responsive, static website featuring an interactive world map. Hover over a numbered map marker to preview the wonder's photo and name, then click the marker to open an educational story panel.
+A minimalist, responsive website featuring an interactive world map of the New Seven Wonders.
 
-## Files
-- `index.html` — page structure and map/modal markup
-- `style.css` — responsive visual design
-- `script.js` — wonder data, map markers, hover previews and story modal
+## Included
+- `index.html` — page structure
+- `style.css` — minimalist cream, forest-green and muted-gold design
+- `script.js` — map markers, hover photo previews and concise educational pop-ups
 
-## Run locally
-Open `index.html` in a modern browser. An internet connection is required for the map tiles, Leaflet library, web fonts and remote photos.
+## Why the map does not need an API key
+This version uses **Leaflet** with **OpenStreetMap** tiles. Neither requires a Google Maps API key. The map libraries and tile images load from the internet, so the page needs an internet connection.
 
 ## Publish with GitHub Pages
-1. Create a new repository on GitHub.
-2. Upload all three website files (`index.html`, `style.css`, `script.js`) and this README.
-3. In the repository, open **Settings → Pages**.
-4. Under **Build and deployment**, choose **Deploy from a branch**.
-5. Choose the `main` branch and `/ (root)` folder, then save.
-6. Wait for GitHub Pages to publish, then open the URL shown in the Pages section.
+1. Create a GitHub repository.
+2. Upload `index.html`, `style.css`, `script.js`, and `README.md` to the repository root.
+3. Open **Settings → Pages**.
+4. Choose **Deploy from a branch**, select `main` and `/(root)`, and save.
+5. Open the published URL shown in the Pages section.
 
-No build step, package manager, or backend is required.
+No build tools, backend, or paid hosting are required.
 
-## Notes
-- The map uses Leaflet and OpenStreetMap tiles.
-- Photos are loaded from Unsplash image URLs; an internet connection is required.
-- This site presents the **New Seven Wonders of the World** list announced in 2007. The Great Pyramid of Giza is commonly treated as an honorary candidate because it is the sole surviving Ancient Wonder, rather than one of the seven selected in 2007.
-- For a production/public project, review image licensing and replace any image URLs with photos you have permission to use. OpenStreetMap tile usage is subject to its tile usage policy.
+## Attribution and images
+Map tiles are provided by OpenStreetMap and include attribution on the map. Images are loaded from Unsplash image URLs. For public or commercial use, review each image's licensing and replace URLs as needed. The site lists the New Seven Wonders announced in 2007; the Great Pyramid of Giza is not part of that seven-item selection.
