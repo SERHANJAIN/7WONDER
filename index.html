@@ -1,179 +1,103 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seven Wonders of the World | Interactive Atlas</title>
-  
-  <!-- Meta tags for SEO & Social Sharing -->
-  <meta name="description" content="An interactive cartographic journey across the 7 Wonders of the World with rich historical archives, architectural deep-dives, and satellite views.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
-
-  <!-- Google Fonts: Cinzel & Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
-
-  <!-- Leaflet CSS for Map rendering -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-  
-  <!-- Custom Stylesheet -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b24">
+  <meta name="description" content="Explore the New Seven Wonders of the World on an interactive map.">
+  <title>Wonders Atlas — Seven Wonders of the World</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="preconnect" href="https://tile.openstreetmap.org">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header / Navigation -->
-  <header class="app-header">
-    <div class="brand">
-      <div class="brand-crest">✦</div>
-      <div class="brand-text">
-        <span class="eyebrow">Interactive Cartography</span>
-        <h1>WONDERS OF THE WORLD</h1>
-      </div>
-    </div>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Wonders Atlas home">
+        <span class="brand-mark">✳</span>
+        <span>WONDERS<span class="brand-light">ATLAS</span></span>
+      </a>
+      <div class="topbar-note"><span class="live-dot"></span> A WORLD OF HUMAN INGENUITY</div>
+      <a class="top-link" href="#explore">Explore the map <span>↗</span></a>
+    </header>
 
-    <!-- Center Control Bar -->
-    <div class="header-controls">
-      <!-- Collection Filter -->
-      <div class="collection-toggle" role="group" aria-label="Wonder collection selection">
-        <button id="btnNewWonders" class="toggle-btn active" data-type="new">
-          <span class="btn-dot"></span> New 7 Wonders
-        </button>
-        <button id="btnAncientWonders" class="toggle-btn" data-type="ancient">
-          <span class="btn-dot"></span> Ancient Wonders
-        </button>
-      </div>
-    </div>
-
-    <!-- Header Right Actions -->
-    <div class="header-actions">
-      <!-- Grand Tour Autopilot -->
-      <button id="btnTour" class="action-btn" title="Automated cinematic flight between wonders">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polygon points="5 3 19 12 5 21 5 3"></polygon>
-        </svg>
-        <span class="action-label">Grand Tour</span>
-      </button>
-
-      <!-- Map Style Selector -->
-      <div class="dropdown-wrapper">
-        <button id="btnMapStyle" class="action-btn icon-only" title="Change Map Visual Style" aria-haspopup="true">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
-            <line x1="8" y1="2" x2="8" y2="18"></line>
-            <line x1="16" y1="6" x2="16" y2="22"></line>
-          </svg>
-        </button>
-        <div id="mapStyleMenu" class="dropdown-menu">
-          <span class="dropdown-title">Cartographic Style</span>
-          <button class="style-option active" data-style="dark">Midnight Obsidian</button>
-          <button class="style-option" data-style="satellite">Orbital Satellite</button>
-          <button class="style-option" data-style="antique">Antique Cartography</button>
-          <button class="style-option" data-style="voyager">Daylight Explorer</button>
+    <main>
+      <section class="intro" id="explore">
+        <div class="eyebrow"><span class="eyebrow-line"></span> SEVEN ICONS. ONE PLANET.</div>
+        <h1>Humanity’s greatest<br><em>masterpieces.</em></h1>
+        <p class="intro-copy">Travel across continents and centuries. Hover over a marker to preview a wonder, then open its story to discover the history behind the landmark.</p>
+        <div class="intro-stats">
+          <div><strong>7</strong><span>Wonders</span></div>
+          <div class="stat-divider"></div>
+          <div><strong>6</strong><span>Countries</span></div>
+          <div class="stat-divider"></div>
+          <div><strong>2,000+</strong><span>Years of history</span></div>
         </div>
-      </div>
+      </section>
 
-      <!-- Sound Toggle -->
-      <button id="btnAudioToggle" class="action-btn icon-only" title="Toggle Spatial Audio" aria-pressed="false">
-        <svg id="iconAudioOff" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="1" y1="1" x2="23" y2="23"></line>
-          <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path>
-          <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path>
-          <line x1="12" y1="19" x2="12" y2="23"></line>
-          <line x1="8" y1="23" x2="16" y2="23"></line>
-        </svg>
-        <svg id="iconAudioOn" class="icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-        </svg>
-      </button>
-
-      <!-- Reset / Center View -->
-      <button id="btnResetView" class="action-btn icon-only" title="Global Overview">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
-          <path d="M2 12h20"></path>
-        </svg>
-      </button>
-    </div>
-  </header>
-
-  <!-- Main Viewport -->
-  <main class="viewport">
-    <!-- Map Container -->
-    <div id="map" class="map-container" aria-label="Interactive World Map"></div>
-
-    <!-- Map Overlay Vignette & Grid Lines -->
-    <div class="map-vignette" pointer-events="none"></div>
-    <div class="map-coordinates" id="liveCoordinates">LAT: 00.0000° N | LON: 00.0000° E</div>
-
-    <!-- Active Tour Banner (Hidden by default) -->
-    <div id="tourBanner" class="tour-banner hidden">
-      <div class="tour-indicator">
-        <span class="tour-pulse"></span>
-        <span class="tour-status">AUTOMATED GRAND TOUR ACTIVE</span>
-      </div>
-      <div class="tour-info" id="tourProgress">Wonder 1 of 7</div>
-      <button id="btnStopTour" class="tour-stop-btn">Pause Tour</button>
-    </div>
-
-    <!-- Bottom Carousel / Drawer of Wonders -->
-    <section class="bottom-shelf" aria-label="Wonders Directory">
-      <div class="shelf-header">
-        <div class="shelf-title">
-          <span class="shelf-badge" id="shelfCountBadge">7 LOCATIONS</span>
-          <span class="shelf-caption">Hover a pin on map or select a monument card below</span>
+      <section class="map-section" aria-label="Interactive world map">
+        <div class="map-heading">
+          <div>
+            <span class="section-kicker">THE EXPLORER</span>
+            <h2>Find your wonder<span class="period">.</span></h2>
+          </div>
+          <div class="map-instructions"><span class="instruction-icon">⌖</span> Hover to preview <span class="instruction-separator">·</span> Click to discover</div>
         </div>
-        <button id="btnToggleShelf" class="shelf-collapse-btn" aria-label="Minimize list">
-          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <div class="cards-track-container">
-        <div class="cards-track" id="cardsTrack">
-          <!-- Dynamic Wonder Cards injected via script.js -->
+        <div class="map-frame">
+          <div class="map-overlay map-overlay-top">
+            <span class="map-tag"><span class="live-dot"></span> INTERACTIVE WORLD MAP</span>
+            <button id="resetMap" class="reset-button" type="button" title="Reset map view">Reset view ↺</button>
+          </div>
+          <div id="map" role="application" aria-label="Map with markers for the seven wonders"></div>
+          <div class="map-legend"><span class="legend-dot"></span> THE NEW 7 WONDERS OF THE WORLD</div>
         </div>
-      </div>
-    </section>
-  </main>
+        <div class="bottom-note"><span>01 — 07</span><span>Every landmark has a story. Start exploring.</span><span>WONDERS ATLAS © 2026</span></div>
+      </section>
+    </main>
 
-  <!-- Educational Modal Overlay -->
-  <div id="modalOverlay" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-backdrop" id="modalBackdrop"></div>
-    
-    <div class="modal-container">
-      <!-- Close button -->
-      <button class="modal-close-btn" id="btnModalClose" aria-label="Close details">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
+    <footer>
+      <span class="footer-brand">WONDERS<span class="brand-light">ATLAS</span></span>
+      <span>Made for the endlessly curious.</span>
+      <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">Map data © OpenStreetMap</a>
+    </footer>
+  </div>
 
-      <!-- Navigation Arrows inside modal -->
-      <button class="modal-nav-btn prev" id="btnModalPrev" aria-label="Previous Wonder" title="Previous Wonder">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-      </button>
-      <button class="modal-nav-btn next" id="btnModalNext" aria-label="Next Wonder" title="Next Wonder">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </button>
-
-      <!-- Modal Body Content -->
-      <article class="modal-content" id="modalContent">
-        <!-- Injected dynamically -->
-      </article>
+  <div id="previewCard" class="preview-card" aria-hidden="true">
+    <img id="previewImage" src="" alt="">
+    <div class="preview-copy">
+      <span id="previewCountry" class="preview-country"></span>
+      <h3 id="previewName"></h3>
+      <span class="preview-action">DISCOVER STORY <span>↗</span></span>
     </div>
   </div>
 
-  <!-- Leaflet JS library -->
+  <div id="wonderModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" data-close="true"></div>
+    <article class="modal-panel">
+      <button class="modal-close" id="closeModal" aria-label="Close story" type="button">×</button>
+      <div class="modal-image-wrap">
+        <img id="modalImage" src="" alt="">
+        <div class="modal-image-shade"></div>
+        <div class="modal-image-label"><span id="modalNumber">01</span><span>THE SEVEN WONDERS</span></div>
+      </div>
+      <div class="modal-content">
+        <div class="modal-kicker" id="modalCountry"></div>
+        <h2 id="modalTitle"></h2>
+        <p class="modal-subtitle" id="modalSubtitle"></p>
+        <div class="modal-facts" id="modalFacts"></div>
+        <div class="story-divider"></div>
+        <h3 class="story-heading">A story carved in time</h3>
+        <p class="modal-description" id="modalDescription"></p>
+        <p class="modal-significance" id="modalSignificance"></p>
+        <div class="modal-footer"><span id="modalCoordinates"></span><button id="nextWonder" type="button">NEXT WONDER <span>→</span></button></div>
+      </div>
+    </article>
+  </div>
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <!-- Application Script -->
   <script src="script.js"></script>
 </body>
 </html>
